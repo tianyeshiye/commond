@@ -1,0 +1,16 @@
+启动服务
+sudo service grafana-server start
+
+
+1、通过系统调用运行
+如果你不是直接下载的二进制可执行文件，则可以通过下面方式启动Grafana：
+
+sudo service grafana-server start
+这样启动的话，Grafana会去读取默认的配置文件，位置在：
+
+/etc/grafana/grafana.ini
+日志会记录在：
+
+/var/log/grafana/grafana.log
+
+https://www.linuxdaxue.com/grafana-config-and-run.html

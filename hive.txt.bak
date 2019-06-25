@@ -1,0 +1,23 @@
+
+
+
+
+
+
+添加分区
+有个表具有两个分区字段：age分区和sex分区。那么我们添加一个age分区为1，sex分区为male的数据，可以这样添加
+alter table testljb add partition(age=1,sex='male');
+
+删除分区age=1
+alter table testljb drop partition(age=1);
+
+
+修复分区
+---修复分区就是重新同步hdfs上的分区信息
+msck repair table table_name;
+
+
+
+
+查询分区
+show partitions table_name;

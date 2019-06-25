@@ -1,0 +1,35 @@
+https://blog.csdn.net/tianyeshiye/article/details/91843790
+https://blog.csdn.net/tianyeshiye/article/details/91843790
+
+# 服务式启动命令
+service influxdb start
+# 停止服务
+service influxdb stop
+# 重启服务
+service influxdb restart
+# 尝试重启服务
+service influxdb try-restart
+# 重新加载服务
+service influxdb reload
+# 强制重新加载服务
+service influxdb force-reload
+# 查看服务状态
+service influxdb status
+ 
+# 以非服务方式启动
+cd /usr/bin
+
+
+
+通过查看服务对应进程
+ps aux | grep influx
+
+
+
+客户端命令行方式操作
+influx
+
+
+
+删除表
+drop measurement metrictable

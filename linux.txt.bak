@@ -68,7 +68,6 @@ locate
 
 设置环境变量
 # export HELLO="Hello!" 
-查看一条环境变量
 # echo #HELLO 
 
 3. 使用env命令显示所有的环境变量 
@@ -81,6 +80,3 @@ BASH=/bin/bash
 
 5. 使用unset命令来清除环境变量
 # unset #TEST #删除环境变量TEST 
-
-
-GOBBLIN_JOB_CONFIG_DIR 
