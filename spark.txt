@@ -1,0 +1,29 @@
+
+Building Applications
+https://www.cloudera.com/documentation/enterprise/latest/topics/spark_building.html#building
+
+
+spark-submit --class com.cloudera.sparkwordcount.JavaWordCount --master local sparkwordcount-0.0.1-SNAPSHOT.jar inputfile.txt 2
+
+
+$ spark-submit --class com.cloudera.sparkwordcount.SparkWordCount \
+  --master local --deploy-mode client --executor-memory 1g \
+  --name wordcount --conf "spark.app.id=wordcount" \
+  sparkwordcount-1.0-SNAPSHOT-jar-with-dependencies.jar \
+  hdfs://namenode_host:8020/path/to/inputfile.txt 2
+
+
+
+
+
+如何在HUE上通过oozie调用Spark工作流
+
+https://blog.csdn.net/CREATE_17/article/details/87908217
+
+
+Spark Streaming 反压（Back Pressure）机制介绍
+
+https://www.iteblog.com/archives/2323.html?from=related
+
+深入理解Spark Streaming流量控制及反压机制
+https://www.jianshu.com/p/425ba321d082
