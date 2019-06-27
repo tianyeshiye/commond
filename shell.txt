@@ -1,0 +1,26 @@
+https://www.runoob.com/linux/linux-shell-variable.html
+http://c.biancheng.net/shell/
+
+
+
+chmod 777 spark_pi.sh
+
+
+
+spark-submit
+
+https://blog.csdn.net/weixin_33816611/article/details/91018373
+
+spark2-submit \      # 第1行
+--class com.google.datalake.TestMain \      #第2行
+--master yarn \      # 第3行
+--deploy-mode client \      # 第4行
+--driver-memory 3g \      # 第5行
+--executor-memory 2g \      # 第6行
+--total-executor-cores 12 \      # 第7行
+--jars /home/jars/test-dep-1.0.0.jar,/home/jars/test-dep2-1.0.0.jar,/home/jars/test-dep3-1.0.0.jar \      # 第8行
+/home/release/jars/test-sql.jar \      # 第9行
+para1 \      # 第10行
+para2 \      # 第11行
+"test sql" \      # 第12行
+parax      # 第13行
