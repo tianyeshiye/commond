@@ -84,3 +84,83 @@ BASH=/bin/bash
 
 
 GOBBLIN_JOB_CONFIG_DIR 
+
+
+执行vi ~/.bash_profile修改文件中PATH一行
+
+
+export GOBBLIN_JOB_CONFIG_DIR="/var/tmp/gobblin/gobblin_job_config_dir"
+export GOBBLIN_WORK_DIR="/var/tmp/gobblin/gobblin_work_dir"
+
+export GOBBLIN_JOB_CONFIG_DIR=/home/gobblin/gobblin_conf_dir
+export GOBBLIN_WORK_DIR=/home/gobblin/gobblin_work_dir
+
+
+job.name=GobblinKafkaQuickStart
+job.group=Gobblin
+job.description=Gobblin quick start job for Kafka
+job.lock.enabled=false
+kafka.brokers=flink:9092,data0:9092,mf:9092
+source.class=gobblin.source.extractor.extract.kafka.KafkaSimpleSource
+extract.namespace=gobblin.extract.kafka
+
+writer.builder.class=gobblin.writer.SimpleDataWriterBuilder
+writer.file.path.type=tablename
+writer.destination.type=HDFS
+writer.output.format=txt
+
+data.publisher.type=gobblin.publisher.BaseDataPublisher
+
+topic.whitelist=test
+simple.writer.delimiter=\n
+
+mr.job.max.mappers=1
+metrics.reporting.file.enabled=true
+metrics.log.dir=${env:GOBBLIN_WORK_DIR}/metrics
+metrics.reporting.file.suffix=txt
+
+bootstrap.with.offset=earliest
+
+
+
+
+
+job.name=GobblinKafkaToHdfs
+job.group=GobblinToHdfs1
+job.description=Pull data from kafka to hdfs use Gobblin
+job.lock.enabled=false
+kafka.brokers=datanode01:9092
+
+source.class=gobblin.source.extractor.extract.kafka.KafkaSimpleSource
+extract.namespace=gobblin.extract.kafka
+topic.whitelist=jsonTest
+
+writer.builder.class=gobblin.writer.SimpleDataWriterBuilder
+simple.writer.delimiter=\n
+simple.writer.prepend.size=false
+writer.file.path.type=tablename
+writer.destination.type=HDFS
+writer.output.format=txt
+writer.partitioner.class=gobblin.example.simplejson.TimeBasedJsonWriterPartitioner
+writer.partition.level=hourly
+writer.partition.pattern=yyyy/MM/dd/HH
+writer.partition.columns=time
+writer.partition.timezone=Asia/Shanghai
+data.publisher.type=gobblin.publisher.TimePartitionedDataPublisher
+
+mr.job.max.mappers=1
+
+metrics.reporting.file.enabled=true
+metrics.log.dir=/gobblin-kafka/metrics
+metrics.reporting.file.suffix=txt
+
+bootstrap.with.offset=earliest
+
+fs.uri=master:8020
+writer.fs.uri=${fs.uri}
+state.store.fs.uri=${fs.uri}
+
+mr.job.root.dir=/gobblin-kafka/working
+state.store.dir=/gobblin-kafka/state-store
+task.data.root.dir=/jobs/kafkaetl/gobblin/gobblin-kafka/task-data
+data.publisher.final.dir=/gobblintest/job-output

@@ -5,3 +5,8 @@ yarn application -status application_XXX
 yarn application -kill application_XXX
 
 sudo -u hive yarn logs -applicationId application_XXX > /temp/xx.log
+
+
+
+sudo -u hdfs yarn logs -applicationId application_1561621377280_0006 > /tmp/ty/006.log
+
