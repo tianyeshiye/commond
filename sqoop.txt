@@ -1,0 +1,50 @@
+sqoop help
+
+sudo -u hdfs sqoop import \
+--connect jdbc:postgresql://localhost:8002/database \
+--username gpadmin \
+--password gpadmin \
+--query 'select p_id, v_id, time from table where $CONDITIONS limit 100000' \
+--map-column-java time=String \
+--map-column-hive time=timestamp \
+--hive-partition-key day \
+--hive-partition-value 20190716 \
+--split-by p_id -m 4 \
+--delete-target-dir \
+--target-dir /user/hive/test \
+--hive-import \
+--hive-overwrite \
+--create-hive-table \
+--hive-database phm \
+--hive-table realtime_train_status
+
+https://blog.csdn.net/u012453843/article/details/52951120
+
+
+sudo -u hive sqoop import \
+--connect jdbc:postgresql://localhost:8002/database \
+--username gpadmin \
+--password gpadmin \
+--table tra_trains \
+--delete-target-dir \
+--fields-terminated-by "\t" \
+--lines-terminated-by "\n" \
+--split-by pk_id -m 1 \
+--hive-import \
+--hive-overwrite \
+--create-hive-table \
+--hive-database phm \
+--hive-table tra_trains
+
+sudo -u hive sqoop import \
+--connect jdbc:postgresql://localhost:8002/database \
+--username gpadmin \
+--password gpadmin \
+--table tra_trains \
+--delete-target-dir \
+--split-by pk_id -m 1 \
+--hive-import \
+--hive-overwrite \
+--create-hive-table \
+--hive-database phm \
+--hive-table tra_trains

@@ -1,8 +1,4 @@
 
-
-
-
-
 -------------------------------------------------------------------
 添加分区
 
@@ -29,3 +25,16 @@ msck repair table table_name;
 -------------------------------------------------------------------
 查询分区
 show partitions table_name;
+
+
+删除表
+DROP TABLE [IF EXISTS] table_name;
+
+
+create table phm.realtime_status_orc stored as orc 
+tblproperties ("orc.compress"="NONE") 
+as select * from phm.trealtime_status order by vid,time limit 28800000 ;
+
+set parquet.compression=gzip ;
+create table phm.realtime_status_parquet_gzip stored as parquet 
+as select * from phm.trealtime_status order by vid,time limit 28800000 ;
