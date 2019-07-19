@@ -1,0 +1,27 @@
+echo "aaaaaaaaaaaaaaaa"
+
+connect='jdbc:postgresql://58.213.23.244:8002/new_eam'
+
+array=(tra_trains tra_line sys_user sys_station sys_dict sys_area sys_tenant sys_office ass_rolling_stock ass_vehicle_structure ass_structure_trouble wtd_signal collection_analysis realtime_train_status inv_discard inv_discard_detail inv_storage inv_supplier inv_bill_detail inv_allotapply_detail inv_bill inv_allot_apply inv_material_directory pur_order pur_order_detail pur_apply_detail pur_apply ser_worksheet_scheme ser_worksheet ser_worksheet_step ser_trouble_report ser_trouble_code inv_material_directory)
+
+for i in ${array[@]} 
+do
+
+echo $i
+
+sudo -u hdfs sqoop import \
+--connect $connect \
+--username gpadmin \
+--password gpadmin \
+--table $i \
+--delete-target-dir \
+--split-by pk_id -m 1 \
+--hive-import \
+--hive-overwrite \
+--create-hive-table \
+--hive-database phm \
+--hive-table $i
+
+echo $i
+
+done
